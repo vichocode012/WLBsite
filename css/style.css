@@ -1,0 +1,321 @@
+/* ============================================================
+   WLB — hoja de estilos
+   Sistema visual: colage punk fotocopiado.
+   Reglas: todo se mueve EN TWOS (steps(1)), nunca suave.
+           paleta = negro / hueso / rojo racionado + un verde.
+   ============================================================ */
+
+/* ---------- fuentes ---------- */
+@font-face{font-family:'215000E';src:url('../fonts/215000E.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Broken 15';src:url('../fonts/Broken_15.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Dirty Ego';src:url('../fonts/Dirty_Ego.ttf') format('truetype');font-display:swap}
+
+:root{
+  /* espina */
+  --void:#0f0d12;
+  --bone:#f0ecf2;
+  --bone-dim:#9a93a6;
+  --slab:#161320;
+  --ash:#241f2c;
+
+  /* rojo racionado — golpes, nunca relleno */
+  --pop:#ff1d1d;
+  --red-deep:#7a1420;
+
+  /* el unico verde (FEVER) — con profundidad tonal */
+  --acc:#659489;
+  --acc2:#8fb3aa;
+  --acc3:#3f6f65;
+  --acc4:#2a4d46;
+
+  /* tipografias por rol */
+  --f-mark:'Rubik Dirt',serif;       /* wordmark WLB */
+  --f-disp:'215000E',serif;          /* titulos grandes */
+  --f-label:'Broken 15',sans-serif;  /* etiquetas */
+  --f-scrawl:'Dirty Ego',cursive;    /* notas a mano */
+  --f-body:'Space Mono',monospace;   /* texto y UI */
+  --f-chip:'Archivo Black',sans-serif;
+
+  --tick:2s;   /* el pulso de todo el sitio */
+  --amp:1;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--void);color:var(--bone);
+  font-family:var(--f-body);font-size:13px;line-height:1.7;
+  overflow-x:hidden;cursor:none;
+}
+a{color:var(--acc2);cursor:none}
+button{cursor:none;font-family:inherit}
+img{max-width:100%;display:block}
+
+/* ============================================================
+   MOVIMIENTO — todo en twos. body.stop lo apaga entero.
+   ============================================================ */
+@keyframes boil-a{0%,49%{transform:translate(0,0) rotate(calc(-.4deg*var(--amp)))}
+                  50%,100%{transform:translate(calc(1px*var(--amp)),calc(-1px*var(--amp))) rotate(calc(.4deg*var(--amp)))}}
+@keyframes boil-b{0%,49%{transform:translate(0,0) rotate(calc(.3deg*var(--amp)))}
+                  50%,100%{transform:translate(calc(-1px*var(--amp)),calc(1px*var(--amp))) rotate(calc(-.3deg*var(--amp)))}}
+@keyframes warp{0%,49%{border-radius:3px 6px 4px 2px/2px 4px 6px 3px}
+                50%,100%{border-radius:5px 2px 3px 6px/4px 6px 2px 5px}}
+@keyframes ghost-red{0%,49%{transform:translate(7px,4px);opacity:.55}
+                     50%,100%{transform:translate(-3px,7px);opacity:.32}}
+@keyframes ghost-acc{0%,49%{transform:translate(-6px,-3px);opacity:.45}
+                     50%,100%{transform:translate(5px,-7px);opacity:.3}}
+@keyframes slap{0%,49%{transform:rotate(-2deg)}50%,100%{transform:translate(1px,-1px) rotate(1.4deg)}}
+@keyframes flickA{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes flickB{0%,49%{opacity:0}50%,100%{opacity:1}}
+/* sombra cercana y sombra lejana — doble pasada de tinta (A2) */
+@keyframes sj{0%,49%{transform:translate(5px,5px)}50%,100%{transform:translate(3px,7px)}}
+@keyframes sj2{0%,49%{transform:translate(9px,9px)}50%,100%{transform:translate(11px,6px)}}
+
+body.stop *{animation:none!important}
+
+/* grano de fotocopia */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:150px 150px;mix-blend-mode:overlay;
+}
+body.stop::after{display:none}
+
+/* ============================================================
+   CURSOR — cruz. Lleva contorno oscuro para no camuflarse
+   con los botones claros.
+   ============================================================ */
+#cur{position:fixed;top:0;left:0;width:32px;height:32px;pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);mix-blend-mode:normal}
+#cur svg{position:absolute;inset:0;width:100%;height:100%}
+#cur .halo{stroke:#0b0910;stroke-width:6;stroke-linecap:round;opacity:.95}
+#cura{animation:flickA var(--tick) steps(1) infinite}
+#curb{animation:flickB var(--tick) steps(1) infinite}
+body.stop #curb{display:none}
+body.stop #cura{animation:none;opacity:1}
+
+/* ============================================================
+   BOTON DE MOVIMIENTO
+   ============================================================ */
+.mot{position:fixed;top:14px;right:14px;z-index:9000;font-family:var(--f-chip);font-size:9px;
+  letter-spacing:.1em;padding:7px 12px;background:var(--void);border:2px solid var(--ash);color:var(--bone-dim)}
+.mot:hover{border-color:var(--acc);color:var(--bone)}
+.mot.off{color:var(--void);background:var(--acc);border-color:var(--acc)}
+
+/* ============================================================
+   PAGINAS — navegacion por botones, una visible a la vez
+   ============================================================ */
+.page{display:none;min-height:100vh}
+.page.on{display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 6vw}
+
+/* ============================================================
+   BOTONES CON SOMBRA — A2 (doble pasada) + A5 (rojo en hover)
+   ============================================================ */
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:9px;
+  font-size:13px;padding:11px 17px;color:var(--bone);text-decoration:none;
+  background:var(--slab);border:2px solid var(--acc);z-index:1;
+}
+.btn svg{width:17px;height:17px;flex-shrink:0}
+.btn::before,.btn::after{content:'';position:absolute;inset:0}
+.btn::before{background:var(--acc3);z-index:-1;animation:sj var(--tick) steps(1) infinite}
+.btn::after{background:var(--red-deep);z-index:-2;animation:sj2 var(--tick) steps(1) infinite}
+.btn:hover{border-color:var(--pop);color:var(--bone)}
+.btn:hover::before{background:var(--pop)}
+.btn:hover::after{background:var(--red-deep)}
+/* tonal: cada boton de una fila usa un verde distinto */
+.btnrow{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btnrow .btn:nth-child(3n+1)::before{background:var(--acc)}
+.btnrow .btn:nth-child(3n+2)::before{background:var(--acc3);animation-delay:.3s}
+.btnrow .btn:nth-child(3n+2)::after{animation-delay:.3s}
+.btnrow .btn:nth-child(3n+3)::before{background:var(--acc4);animation-delay:.6s}
+.btnrow .btn:nth-child(3n+3)::after{animation-delay:.6s}
+.btnrow .btn:hover::before{background:var(--pop)}
+
+/* iconos circulares */
+.ico{width:52px;height:52px;border-radius:50%;background:var(--acc3);display:flex;align-items:center;
+  justify-content:center;color:var(--bone);border:2px solid var(--acc);text-decoration:none;
+  animation:boil-b var(--tick) steps(1) infinite}
+.ico:nth-child(2){animation-delay:.25s;background:var(--acc4)}
+.ico:nth-child(3){animation-delay:.5s}
+.ico:nth-child(4){animation-delay:.75s;background:var(--acc4)}
+.ico:nth-child(5){animation-delay:1s}
+.ico svg{width:23px;height:23px}
+.ico:hover{background:var(--pop);border-color:var(--bone)}
+
+/* chips estilo Deadlock */
+.chip{display:inline-block;font-family:var(--f-chip);font-size:11px;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--bone);background:var(--acc3);padding:4px 11px;
+  clip-path:polygon(0 6%,100% 0,99% 94%,1% 100%);animation:slap var(--tick) steps(1) infinite}
+.chip:nth-child(2){animation-delay:.3s;background:var(--acc)}
+.chip:nth-child(3){animation-delay:.6s;background:var(--acc4)}
+.chip:nth-child(4){animation-delay:.9s;background:var(--acc3)}
+.chip.red{background:var(--pop);color:var(--void)}
+.chiprow{display:flex;gap:7px;flex-wrap:wrap}
+
+/* ============================================================
+   LANDING
+   ============================================================ */
+.land{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;position:relative}
+.land .dots,.land .reddots{position:absolute;inset:0;pointer-events:none}
+.land .dots{background-image:radial-gradient(circle,var(--acc) 1.6px,transparent 2px);background-size:12px 12px;
+  opacity:.18;-webkit-mask-image:linear-gradient(250deg,#000,transparent 65%);mask-image:linear-gradient(250deg,#000,transparent 65%)}
+.land .reddots{background-image:radial-gradient(circle,var(--pop) 1.4px,transparent 2px);background-size:47px 47px;
+  opacity:.2;-webkit-mask-image:radial-gradient(60% 50% at 20% 70%,#000,transparent);mask-image:radial-gradient(60% 50% at 20% 70%,#000,transparent)}
+.slash{position:absolute;left:50%;top:0;bottom:0;width:5px;background:var(--bone);transform:skewX(-9deg);
+  z-index:3;animation:boil-b var(--tick) steps(1) infinite}
+.mark-wrap{display:flex;flex-direction:column;justify-content:center;padding:6vh 0 6vh 7vw;position:relative;z-index:2}
+.mark{position:relative;display:inline-block;font-family:var(--f-mark);font-size:clamp(70px,15vw,190px);
+  line-height:.8;color:var(--bone);animation:boil-a var(--tick) steps(1) infinite}
+.mark .g{position:absolute;inset:0;z-index:-1}
+.mark .gr{color:var(--pop);animation:ghost-red var(--tick) steps(1) infinite}
+.mark .gs{color:var(--acc);animation:ghost-acc var(--tick) steps(1) .2s infinite}
+.tagline{font-family:var(--f-chip);font-size:clamp(10px,1.3vw,13px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--acc2);margin-top:22px}
+.tagline .r{color:var(--pop)}
+.socs{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px}
+
+.navcol{display:flex;flex-direction:column;justify-content:center;padding:6vh 7vw 6vh 5vw;position:relative;z-index:2}
+
+/* boton grande de Revival — se come el espacio */
+.nb-main{position:relative;display:block;width:100%;text-align:left;background:var(--slab);
+  border:3px solid var(--pop);padding:30px 24px;margin-bottom:14px;color:var(--bone);overflow:hidden}
+.nb-main .dots{position:absolute;inset:0;background-image:radial-gradient(circle,var(--acc) 1.5px,transparent 2px);
+  background-size:13px 13px;opacity:.16;-webkit-mask-image:linear-gradient(200deg,#000,transparent 70%);
+  mask-image:linear-gradient(200deg,#000,transparent 70%);pointer-events:none}
+.nb-main .n{position:relative;font-family:var(--f-chip);font-size:9px;letter-spacing:.2em;color:var(--acc)}
+.nb-main .t{position:relative;display:inline-block;font-family:var(--f-mark);font-size:clamp(30px,5.2vw,60px);
+  line-height:.85;margin:10px 0 14px;animation:boil-a var(--tick) steps(1) infinite}
+.nb-main .t .g{position:absolute;inset:0;z-index:-1}
+.nb-main .t .gr{color:var(--pop);animation:ghost-red var(--tick) steps(1) infinite}
+.nb-main .t .gs{color:var(--acc);animation:ghost-acc var(--tick) steps(1) .2s infinite}
+.nb-main p{position:relative;color:var(--bone-dim);font-size:12px;margin-top:12px;max-width:520px}
+.nb-main:hover{border-color:var(--bone)}
+
+/* botones chicos */
+.nbgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nb{position:relative;display:block;text-align:left;background:var(--slab);border:2px solid var(--ash);
+  padding:18px 16px;color:var(--bone)}
+.nb .n{font-family:var(--f-chip);font-size:9px;letter-spacing:.16em;color:var(--bone-dim);display:block}
+.nb .t{font-family:var(--f-chip);font-size:clamp(16px,2.4vw,23px);text-transform:uppercase;display:block;
+  line-height:1;margin:5px 0 8px}
+.nb .d{font-size:11px;color:var(--bone-dim);display:block}
+.nb:hover{border-color:var(--acc)}
+.nb:hover .t{color:var(--acc2);animation:boil-a calc(var(--tick)*.7) steps(1) infinite}
+
+/* ============================================================
+   PANELES INTERNOS
+   ============================================================ */
+.pad{padding:78px 0 90px}
+.back{font-family:var(--f-chip);font-size:9px;letter-spacing:.12em;background:none;border:2px solid var(--ash);
+  color:var(--bone-dim);padding:7px 12px;margin-bottom:30px}
+.back:hover{border-color:var(--pop);color:var(--bone)}
+
+.ptitle{position:relative;display:inline-block;font-family:var(--f-mark);font-size:clamp(34px,6.5vw,68px);
+  line-height:.85;margin-bottom:8px;animation:boil-a var(--tick) steps(1) infinite}
+.ptitle .g{position:absolute;inset:0;z-index:-1}
+.ptitle .gr{color:var(--pop);animation:ghost-red var(--tick) steps(1) infinite}
+.ptitle .gs{color:var(--acc);animation:ghost-acc var(--tick) steps(1) .2s infinite}
+.psub{font-family:var(--f-chip);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--acc2);margin-bottom:30px}
+
+/* pestañas */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:3px solid var(--ash);padding-bottom:10px;margin-bottom:28px}
+.tb{font-family:var(--f-chip);font-size:10px;letter-spacing:.09em;text-transform:uppercase;background:none;
+  border:2px solid transparent;color:var(--bone-dim);padding:6px 12px}
+.tb:hover{color:var(--bone)}
+.tb.on{color:var(--void);background:var(--acc)}
+.tp{display:none}
+.tp.on{display:block}
+
+h3.h{font-family:var(--f-chip);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc2);
+  margin:30px 0 10px}
+h3.h:first-child{margin-top:0}
+p.t{color:var(--bone-dim);max-width:680px;margin-bottom:12px}
+p.t strong{color:var(--bone)}
+.scrawl{font-family:var(--f-scrawl);font-size:19px;color:var(--acc2);line-height:1.4;
+  transform:rotate(-1.5deg);display:inline-block;margin:6px 0 14px}
+
+.card{border:2px solid var(--ash);background:var(--slab);padding:20px 20px;margin-bottom:12px;max-width:720px}
+.card .lab{font-family:var(--f-chip);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acc);margin-bottom:8px}
+.warn{border:2px solid var(--pop);border-left:6px solid var(--pop);background:rgba(255,29,29,.06);
+  padding:16px 18px;margin:20px 0;max-width:720px}
+.warn .lab{font-family:var(--f-chip);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--pop);margin-bottom:8px}
+
+/* galerias */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.gc{border:2px solid var(--ash);background:var(--slab);overflow:hidden;animation:boil-b var(--tick) steps(1) infinite}
+.gc:nth-child(even){animation-delay:.4s}
+.gc img{width:100%;height:210px;object-fit:cover;filter:contrast(1.06) saturate(.95)}
+.gc .lb{font-family:var(--f-chip);font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--bone-dim);padding:8px 10px}
+.gc:hover{border-color:var(--acc)}
+.gc:hover .lb{color:var(--acc2)}
+
+/* fichas de personaje (grid del panel Revival) */
+.chargrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.chard{border:2px solid var(--ash);background:var(--slab);overflow:hidden;text-align:left;color:var(--bone);
+  padding:0 0 14px;display:block;width:100%}
+.chard img{width:100%;height:250px;object-fit:cover;object-position:top}
+.chard .nm{font-family:var(--f-mark);font-size:24px;margin:12px 14px 2px}
+.chard .rl{font-size:11px;color:var(--bone-dim);margin:0 14px 10px}
+.chard .chiprow{margin:0 14px}
+.chard:hover{border-color:var(--acc)}
+
+/* videos */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.vc{border:2px solid var(--ash);background:var(--slab)}
+.vc .fr{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.vc iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vc .ti{font-family:var(--f-chip);font-size:11px;text-transform:uppercase;padding:11px 12px 3px;letter-spacing:.04em}
+.vc .de{font-size:11.5px;color:var(--bone-dim);padding:0 12px 13px;line-height:1.6}
+.vc:hover{border-color:var(--acc)}
+
+/* ============================================================
+   WIKI — logotipo escrito a mano + color por personaje
+   ============================================================ */
+.wiki{--char:var(--acc)}
+.swap{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px}
+.sw{font-family:var(--f-chip);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:none;
+  border:2px solid var(--ash);color:var(--bone-dim);padding:6px 12px}
+.sw:hover{color:var(--bone)}
+.sw.on{color:var(--void);background:var(--bone);border-color:var(--bone)}
+.logo{position:relative;height:clamp(80px,12vw,140px);margin-bottom:6px}
+.logo i{position:absolute;inset:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:left center;mask-position:left center;-webkit-mask-size:contain;mask-size:contain}
+.logo .l1{background:var(--bone);animation:boil-a var(--tick) steps(1) infinite;z-index:2}
+.logo .l2{background:var(--pop);animation:ghost-red var(--tick) steps(1) infinite;z-index:1}
+.logo .l3{background:var(--char);animation:ghost-acc var(--tick) steps(1) .2s infinite;z-index:0}
+.wrole{font-family:var(--f-chip);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--char);margin-bottom:18px}
+.wiki .tb.on{background:var(--char)}
+.wiki h3.h{color:var(--char)}
+table{width:100%;max-width:760px;border-collapse:collapse;font-size:12.5px;margin-bottom:16px}
+th{text-align:left;font-family:var(--f-chip);font-size:9px;letter-spacing:.09em;color:var(--char);
+  text-transform:uppercase;border-bottom:2px solid var(--ash);padding:8px 14px 8px 0}
+td{border-bottom:1px solid var(--ash);padding:9px 14px 9px 0;color:var(--bone-dim);vertical-align:top}
+td:first-child{color:var(--bone);white-space:nowrap;width:150px}
+
+/* skills */
+.sk{display:inline-block;font-family:var(--f-chip);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 12px;margin:0 6px 6px 0}
+.sk.full{background:var(--acc);color:var(--void)}
+.sk.mid{border:2px solid var(--acc);color:var(--acc2)}
+.sk.low{border:2px dashed var(--ash);color:var(--bone-dim)}
+
+/* footer */
+footer{border-top:3px solid var(--ash);padding:30px 6vw 60px;color:var(--bone-dim);font-size:11px}
+footer .fr{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+footer img{width:34px;height:34px;object-fit:contain}
+
+@media(max-width:860px){
+  .land{grid-template-columns:1fr}
+  .slash{display:none}
+  .mark-wrap{padding:9vh 7vw 3vh}
+  .navcol{padding:0 7vw 9vh}
+  .nbgrid{grid-template-columns:1fr}
+  td:first-child{width:auto}
+}
