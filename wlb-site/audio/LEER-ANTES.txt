@@ -1,0 +1,10 @@
+Pon aqui tu musica con el nombre exacto:
+
+    theme.mp3
+
+Formato mp3, y ojala menos de 5 MB (si pesa mucho la pagina
+tarda en cargar). Que sea un loop limpio, sin silencio al
+principio ni al final.
+
+Si este archivo no existe, el reproductor simplemente no
+aparece en la pagina. No se rompe nada.

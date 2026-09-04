@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WLB — game dev / character design / Revival ZRO</title>
+<meta name="description" content="WLB — artist and game dev. Character design, 3D, animation, and Revival ZRO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ CURSOR ============ -->
+<div id="cur" aria-hidden="true">
+  <svg id="cura" viewBox="0 0 32 32" fill="none">
+    <line class="halo" x1="16" y1="1" x2="16" y2="31"/><line class="halo" x1="1" y1="16" x2="31" y2="16"/>
+    <circle class="halo" cx="16" cy="16" r="4.5" fill="none"/>
+    <line x1="16" y1="1" x2="16" y2="31" stroke="#ff1d1d" stroke-width="2.5"/>
+    <line x1="1" y1="16" x2="31" y2="16" stroke="#ff1d1d" stroke-width="2.5"/>
+    <circle cx="16" cy="16" r="4.5" stroke="#ff1d1d" stroke-width="2" fill="none"/>
+  </svg>
+  <svg id="curb" viewBox="0 0 32 32" fill="none">
+    <line class="halo" x1="16" y1="2" x2="17" y2="30"/><line class="halo" x1="2" y1="15" x2="30" y2="17"/>
+    <circle class="halo" cx="16" cy="16" r="5.5" fill="none"/>
+    <line x1="16" y1="2" x2="17" y2="30" stroke="#659489" stroke-width="2.5"/>
+    <line x1="2" y1="15" x2="30" y2="17" stroke="#659489" stroke-width="2.5"/>
+    <circle cx="16" cy="16" r="5.5" stroke="#659489" stroke-width="2" fill="none"/>
+  </svg>
+</div>
+
+<button class="mot" id="mot">MOTION: ON</button>
+
+<!-- ============================================================
+     LANDING
+     ============================================================ -->
+<div class="page on" id="p-home">
+  <div class="land">
+    <div class="dots"></div><div class="reddots"></div><div class="slash"></div>
+
+    <div class="mark-wrap">
+      <div>
+        <div class="mark">WLB<span class="g gr" aria-hidden="true">WLB</span><span class="g gs" aria-hidden="true">WLB</span></div>
+        <p class="tagline">he/him <span class="r">·</span> game dev <span class="r">·</span> character design <span class="r">·</span> revival zro</p>
+        <div class="socs">
+          <a class="ico" href="https://wilbuh0.itch.io/" target="_blank" rel="noopener" title="itch.io" aria-label="itch.io"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.1 1.3C2.1 2 0 4.3 0 5v1c0 1.3 1.2 2.4 2.3 2.4 1.3 0 2.4-1.1 2.4-2.4 0 1.3 1.1 2.4 2.4 2.4S9.5 7.3 9.5 6c0 1.3 1.1 2.4 2.4 2.4h.1c1.3 0 2.4-1.1 2.4-2.4 0 1.3 1 2.4 2.4 2.4 1.3 0 2.4-1.1 2.4-2.4 0 1.3 1.1 2.4 2.4 2.4C22.8 8.4 24 7.3 24 6V5c0-.6-2.1-3-3.1-3.6-3.3-.1-5.8-.2-8.9-.2-3 0-5.6 0-8.9.1zm5.2 8.5c-.7 0-1.2.1-1.6.3-.8.3-1.5 1-1.5 1l-2 8.3c1.9.7 4.2 1.1 6.9 1.2 2.7 0 4.9-.5 6.9-1.2l-2-8.3s-.8-.7-1.5-1c-.4-.2-1-.3-1.6-.3zm-.4 2.3h3.5c.3 0 .6.1.6.4v.5c0 .2-.1.4-.3.5l-.5.1v4l-3.1-4.1h-.2v4l.5.1c.2.1.3.2.3.5v.5c0 .3-.3.4-.6.4H8.3c-.3 0-.6-.1-.6-.4v-.5c0-.2.1-.4.3-.5l.5-.1v-4l-.5-.1c-.2-.1-.3-.2-.3-.5v-.5c0-.3.3-.4.6-.4h.6z"/></svg></a>
+          <a class="ico" href="https://www.youtube.com/@eden_EDN" target="_blank" rel="noopener" title="YouTube — @eden_EDN" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+          <button class="ico" id="dc-open" title="Discord — wilbuh (Ψilb)" aria-label="Discord"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4a19.8 19.8 0 00-4.9-1.5c-.2.4-.4.9-.6 1.3a18.3 18.3 0 00-5.5 0c-.2-.4-.4-.9-.6-1.3a19.7 19.7 0 00-4.9 1.5C.5 9-.3 13.6.1 18.1a19.9 19.9 0 006 3c.5-.6.9-1.3 1.2-2a13 13 0 01-1.9-.9l.4-.3c3.9 1.8 8.2 1.8 12.1 0l.4.3c-.6.4-1.2.7-1.9.9.4.7.8 1.4 1.2 2a19.8 19.8 0 006-3c.5-5.2-.8-9.7-3.5-13.7zM8 15c-1.2 0-2.1-1.1-2.1-2.4 0-1.3.9-2.4 2.1-2.4s2.2 1.1 2.2 2.4c0 1.3-1 2.4-2.2 2.4zm8 0c-1.2 0-2.1-1.1-2.1-2.4 0-1.3.9-2.4 2.1-2.4s2.2 1.1 2.2 2.4c0 1.3-1 2.4-2.2 2.4z"/></svg></button>
+          <a class="ico" href="https://bsky.app/profile/wilbuhart26.bsky.social" target="_blank" rel="noopener" title="Bluesky (abandoned lol)" aria-label="Bluesky"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg></a>
+          <a class="ico" href="mailto:vichomail80085@gmail.com" title="vichomail80085@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg></a>
+        </div>
+
+        <!-- reproductor: arranca al 5% -->
+        <div class="music" id="music" hidden>
+          <button class="mbtn" id="m-play" aria-label="play">▶</button>
+          <span class="mlab">MUSIC</span>
+          <input class="mrange" id="m-vol" type="range" min="0" max="100" value="5" aria-label="volume">
+          <span class="mval" id="m-val">5%</span>
+        </div>
+        <audio id="m-audio" loop preload="none" src="audio/theme.mp3"></audio>
+      </div>
+    </div>
+
+    <div class="navcol">
+      <button class="nb-main" data-go="p-revival">
+        <span class="dots"></span>
+        <span class="n">01 / MAIN PROJECT</span>
+        <span class="t">REVIVAL ZRO<span class="g gr" aria-hidden="true">REVIVAL ZRO</span><span class="g gs" aria-hidden="true">REVIVAL ZRO</span></span>
+        <span class="chiprow"><span class="chip">LORE</span><span class="chip">CHARS</span><span class="chip">CONCEPTS</span><span class="chip red">WIKI</span></span>
+        <p>an infinite hell that generates personalized nightmares. four unlikely heroes. the game i'm putting everything into.</p>
+      </button>
+
+      <div class="nbgrid">
+        <button class="nb" data-go="p-videos">
+          <span class="n">02 /</span><span class="t">Videos</span>
+          <span class="d">animation, prototypes, college work</span>
+        </button>
+        <button class="nb" data-go="p-wiki">
+          <span class="n">03 /</span><span class="t">Wiki</span>
+          <span class="d">full character files</span>
+        </button>
+        <button class="nb" data-go="p-work">
+          <span class="n">04 /</span><span class="t">My Work</span>
+          <span class="d">drawings, 3D, logos</span>
+        </button>
+        <button class="nb" data-go="p-about">
+          <span class="n">05 /</span><span class="t">About</span>
+          <span class="d">who, skills, tools, safety</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     REVIVAL ZRO
+     ============================================================ -->
+<div class="page" id="p-revival"><div class="wrap pad">
+  <button class="back" data-go="p-home">← back</button>
+  <div class="ptitle">REVIVAL ZRO<span class="g gr" aria-hidden="true">REVIVAL ZRO</span><span class="g gs" aria-hidden="true">REVIVAL ZRO</span></div>
+  <div class="psub">01 / main project</div>
+
+  <div class="tabs">
+    <button class="tb on" data-tab="r-lore">Lore</button>
+    <button class="tb" data-tab="r-chars">Characters</button>
+    <button class="tb" data-tab="r-concepts">Concepts</button>
+    <button class="tb" data-tab="r-sprites">Sprites</button>
+    <button class="tb" data-tab="r-videos">Videos</button>
+  </div>
+
+  <div class="tp on" id="r-lore">
+    <p class="t">An infinite Hell — a reality-warping dimension that generates personalized nightmares for every soul trapped within. At its deepest point, monsters spontaneously emerge and begin their ascent, threatening every layer above.</p>
+    <p class="t">A cult revived three ancient mages. A sentient fungus took control of their bodies and powers. Three portals were torn open. An endless tide of monsters now floods Limbo — the neutral zone between Hell and the living world.</p>
+    <p class="t">Four unlikely heroes must fight back. Demon twins, a battle angel, and a witch with a hidden agenda.</p>
+
+    <h3 class="h">Setting</h3>
+    <p class="t">Limbo is the primary battlefield — a decaying region where gothic cathedrals stand next to brutalist bunkers, cartoon forests grow between ancient ruins. Hell itself shifts art styles based on whose nightmare is being generated. No two souls experience the same Hell.</p>
+
+    <h3 class="h">Tone</h3>
+    <div class="chiprow" style="margin-bottom:12px"><span class="chip">Silly</span><span class="chip">Funny</span><span class="chip">Cool</span></div>
+    <p class="t">Rule of Cool above all. No stat grinding — progression through skill and style. Combat is the most important feature. Everything else supports it.</p>
+
+    <div class="warn">
+      <div class="lab">Status</div>
+      <p class="t" style="margin:0">currently on pause — finishing character designs and college first. previous builds exist and are playable (see the Videos tab). full development continues after.</p>
+    </div>
+  </div>
+
+  <div class="tp" id="r-chars">
+    <p class="t">click any of them to open their full file in the wiki.</p>
+    <div class="chargrid">
+      <button class="chard" data-wiki="chordeva">
+        <img src="img/chordeva_card.jpg" alt="Chordeva" loading="lazy">
+        <div class="nm">Chordeva</div><div class="rl">Chaotic Catalyst · Melee Speedster</div>
+        <div class="chiprow"><span class="chip">Melee</span><span class="chip">Demon</span><span class="chip">Final Design</span></div>
+      </button>
+      <button class="chard" data-wiki="charon">
+        <img src="img/charon_card.jpg" alt="Charon" loading="lazy">
+        <div class="nm">Charon</div><div class="rl">Timid Prince · Ranged Gunslinger</div>
+        <div class="chiprow"><span class="chip">Ranged</span><span class="chip">Demon</span><span class="chip">WIP</span></div>
+      </button>
+      <button class="chard" data-wiki="seph">
+        <img src="img/seph_card.jpg" alt="Seph" loading="lazy">
+        <div class="nm">Seph</div><div class="rl">Frozen Guardian · Tank</div>
+        <div class="chiprow"><span class="chip">Angel</span><span class="chip">Tank</span><span class="chip red">Redesign</span></div>
+      </button>
+      <button class="chard" data-wiki="freya">
+        <img src="img/freya_card.jpg" alt="Freya" loading="lazy">
+        <div class="nm">Freya</div><div class="rl">Insecure Bully · Fire Mage</div>
+        <div class="chiprow"><span class="chip">Fire</span><span class="chip">Witch</span></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="tp" id="r-concepts">
+    <p class="t">concept art, design sketches, world stuff — more coming as the project develops.</p>
+    <div class="grid" data-gallery="revival-concepts"></div>
+  </div>
+
+  <div class="tp" id="r-sprites">
+    <h3 class="h">Walk cycles</h3>
+    <p class="t">in-game sprite animations — all four characters.</p>
+    <div class="grid" data-gallery="revival-sprites"></div>
+  </div>
+
+  <div class="tp" id="r-videos">
+    <p class="t">both builds are currently on pause — finishing character designs and college first. these show where the project has been.</p>
+    <div class="vgrid" data-videos="revival"></div>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     WIKI
+     ============================================================ -->
+<div class="page" id="p-wiki"><div class="wrap pad wiki" id="wiki">
+  <button class="back" data-go="p-home">← back</button>
+  <div class="psub" style="margin-bottom:16px">03 / character files</div>
+
+  <div class="swap">
+    <button class="sw on" data-char="chordeva">Chordeva</button>
+    <button class="sw" data-char="charon">Charon</button>
+    <button class="sw" data-char="seph">Seph</button>
+    <button class="sw" data-char="freya">Freya</button>
+  </div>
+
+  <div class="logo"><i class="l3" id="wl3"></i><i class="l2" id="wl2"></i><i class="l1" id="wl1"></i></div>
+  <div class="wrole" id="wrole"></div>
+  <div class="chiprow" id="wchips" style="margin-bottom:24px"></div>
+
+  <div class="tabs" id="wtabs">
+    <button class="tb on" data-wtab="look">Appearance</button>
+    <button class="tb" data-wtab="pers">Personality</button>
+    <button class="tb" data-wtab="fight">Combat</button>
+    <button class="tb" data-wtab="rel">Relationships</button>
+  </div>
+  <div id="wbody"></div>
+</div></div>
+
+<!-- ============================================================
+     VIDEOS
+     ============================================================ -->
+<div class="page" id="p-videos"><div class="wrap pad">
+  <button class="back" data-go="p-home">← back</button>
+  <div class="ptitle">VIDEOS<span class="g gr" aria-hidden="true">VIDEOS</span><span class="g gs" aria-hidden="true">VIDEOS</span></div>
+  <div class="psub">02 / what i've made and how it went</div>
+
+  <div class="tabs">
+    <button class="tb on" data-tab="v-revival">Revival</button>
+    <button class="tb" data-tab="v-anim">Animation</button>
+    <button class="tb" data-tab="v-college">College</button>
+  </div>
+
+  <div class="tp on" id="v-revival">
+    <p class="t">in rough order — from the first prototype to the current 3D build. the descriptions are mine, written as i uploaded them.</p>
+    <div class="vgrid" data-videos="revival"></div>
+  </div>
+  <div class="tp" id="v-anim">
+    <p class="t">hand-drawn animation, mostly in clip studio paint.</p>
+    <div class="vgrid" data-videos="animation"></div>
+  </div>
+  <div class="tp" id="v-college">
+    <p class="t">assignments and exams — godot, blender, stop motion.</p>
+    <div class="vgrid" data-videos="college"></div>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     MY WORK
+     ============================================================ -->
+<div class="page" id="p-work"><div class="wrap pad">
+  <button class="back" data-go="p-home">← back</button>
+  <div class="ptitle">MY WORK<span class="g gr" aria-hidden="true">MY WORK</span><span class="g gs" aria-hidden="true">MY WORK</span></div>
+  <div class="psub">04 / drawings, 3D, other projects</div>
+
+  <div class="tabs">
+    <button class="tb on" data-tab="w-draw">Drawings</button>
+    <button class="tb" data-tab="w-3d">3D</button>
+    <button class="tb" data-tab="w-other">Other</button>
+  </div>
+
+  <div class="tp on" id="w-draw">
+    <div class="grid" data-gallery="work-drawings"></div>
+    <div class="card" style="margin-top:18px">
+      <div class="lab">Aethyx</div>
+      <p class="t" style="margin:0">college assignment. the professor gave us a rough backstory to work from — the design, the shapes, the colour and everything on the sheet is mine.</p>
+    </div>
+    <p class="t" style="margin-top:14px">more work coming as i make stuff.</p>
+  </div>
+  <div class="tp" id="w-3d">
+    <div class="grid" data-gallery="work-3d"></div>
+    <p class="t" style="margin-top:18px">blender stuff — models and renders. still sorting through what's worth showing.</p>
+  </div>
+  <div class="tp" id="w-other">
+    <div class="grid" data-gallery="work-other"></div>
+    <p class="t" style="margin-top:18px">college work and other stuff coming soon.</p>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<div class="page" id="p-about"><div class="wrap pad">
+  <button class="back" data-go="p-home">← back</button>
+  <div class="ptitle">ABOUT<span class="g gr" aria-hidden="true">ABOUT</span><span class="g gs" aria-hidden="true">ABOUT</span></div>
+  <div class="psub">05 / who, skills, tools, trust stuff</div>
+
+  <div class="tabs">
+    <button class="tb on" data-tab="a-who">Who</button>
+    <button class="tb" data-tab="a-skills">Skills</button>
+    <button class="tb" data-tab="a-tools">Tools</button>
+    <button class="tb" data-tab="a-ai">On AI</button>
+    <button class="tb" data-tab="a-safety">Safety</button>
+  </div>
+
+  <div class="tp on" id="a-who">
+    <div class="scrawl">currently working on: character design + models + college stuff</div>
+    <div class="card">
+      <div class="lab">WLB</div>
+      <p class="t">20 · he/him · Spanish &amp; English</p>
+      <p class="t">still learning everything, not a professional yet. beginner across the board but getting there.</p>
+      <p class="t" style="margin:0">all my work is inspired by my favorite creations.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Commissions</div>
+      <p class="t"><strong>CLOSED</strong></p>
+      <p class="t" style="margin:0">not confident enough to charge yet — unless you know exactly what you want and you're ok with me not being 100% consistent.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Find me</div>
+      <p class="t">main contact: <strong>Discord — wilbuh (Ψilb)</strong> — basically the only place i actually check. fair warning: if i don't reply fast it's probably cuz i forgot or i'm scared of answering lol</p>
+      <p class="t" style="margin:0">games: <a href="https://wilbuh0.itch.io/" target="_blank" rel="noopener">itch.io/wilbuh0</a> · videos: <a href="https://www.youtube.com/@eden_EDN" target="_blank" rel="noopener">youtube @eden_EDN</a> · <a href="https://bsky.app/profile/wilbuhart26.bsky.social" target="_blank" rel="noopener">bluesky</a> (abandoned) · <a href="mailto:vichomail80085@gmail.com">vichomail80085@gmail.com</a></p>
+    </div>
+    <div class="warn">
+      <div class="lab">!! no public art posting / no twitter / no discord server</div>
+      <p class="t">i don't post my work publicly on instagram, twitter/x, or similar platforms. i don't want my art fed into AI training systems. i do have an instagram where i put a few project photos, but it's <strong>private</strong> — that's the only way i'm willing to use it.</p>
+      <p class="t" style="margin:0">i also don't have a discord server and won't be making one — i'm not interested in moderating or taking care of one. if you want to reach me, just DM wilbuh directly.</p>
+    </div>
+  </div>
+
+  <div class="tp" id="a-skills">
+    <p class="t"><span style="color:var(--acc2)">filled</span> = stronger &nbsp; <span style="color:var(--acc2)">outlined</span> = still learning &nbsp; <span style="color:var(--bone-dim)">dashed</span> = just started</p>
+    <div style="margin-top:14px">
+      <span class="sk full">Artist</span><span class="sk full">Character Design</span><span class="sk full">Spanish</span><span class="sk full">English</span>
+      <span class="sk mid">3D Artist</span><span class="sk mid">Animator</span><span class="sk mid">Game Dev</span>
+      <span class="sk low">Music</span><span class="sk low">Web</span>
+    </div>
+  </div>
+
+  <div class="tp" id="a-tools">
+    <div class="chiprow" style="margin-bottom:16px">
+      <span class="chip">Blender</span><span class="chip">Godot</span><span class="chip">Clip Studio Paint</span>
+    </div>
+    <p class="t">no generative AI used in my artwork or game dev work. see the "On AI" tab for the full story.</p>
+  </div>
+
+  <div class="tp" id="a-ai">
+    <p class="t">revival was made 100% by myself. right now i'm telling claude what i want the game to have — i'm not asking it to make a game and finish revival for me. i plan the characters, the story, the design and everything visual and story-wise myself. the only thing i use claude for is code. music is done by a couple of friends.</p>
+    <p class="t">if one day i get the chance to hire people who can help me with code, i'll gladly take it. right now i just want to give an example of what i can do.</p>
+    <p class="t">the first revival project was made in one year (2024). it taught me most of what i know about godot, but that was a year where i was still figuring things out about myself, so it wasn't all smooth. in 2025 and 2026 i learned blender. if possible, i'll learn gdscript until i can work on a fresh revival with code written by a human.</p>
+    <div class="warn">
+      <div class="lab">the part that matters</div>
+      <p class="t" style="margin:0">my artwork is 100% mine. no generative AI touches my drawings, my models or my animations — and i don't post on instagram or twitter because i don't want my art scraped for training.</p>
+    </div>
+  </div>
+
+  <div class="tp" id="a-safety">
+    <div class="psub" style="margin-bottom:14px">// safety stuff</div>
+    <p class="t">i will <strong>never DM you asking for money, personal info, or anything sus.</strong></p>
+    <p class="t">if someone does — it's not me. OR i fucken lost everything (jk)</p>
+    <p class="t">i don't post my work publicly on instagram, twitter, or similar. i don't want my work fed to AI systems. my instagram exists but it's private, and that's the only way i use it.</p>
+    <p class="t">main contact: <strong>Discord — wilbuh (Ψilb)</strong>. DM directly, no server — i'm not interested in moderating one. that's where i actually am.</p>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     POPUP DE DISCORD
+     ============================================================ -->
+<div class="modal" id="dc-modal" hidden>
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Discord">
+    <button class="modal-x" data-close aria-label="close">×</button>
+    <div class="modal-grid">
+      <img src="img/discord_profile.jpg" alt="Discord profile: Ψilb / wilbuh" loading="lazy">
+      <div>
+        <div class="modal-lab">Discord</div>
+        <div class="modal-tag">Ψilb</div>
+        <div class="modal-user">wilbuh</div>
+        <p class="t">this is where i actually am. DM me directly.</p>
+        <div class="warn" style="margin:16px 0 0">
+          <div class="lab">no server</div>
+          <p class="t" style="margin:0">i don't have a discord server and i'm not making one. i'm not interested in moderating or taking care of one — it's too much responsibility. just DM me.</p>
+        </div>
+        <p class="t" style="margin-top:14px;font-size:11.5px">fair warning: if i don't reply fast it's probably cuz i forgot or i'm scared of answering lol</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="fr">
+    <img src="img/wlb_mark.jpg" alt="WLB">
+    <span>WLB · he/him · ES &amp; EN</span>
+  </div>
+  no AI used in my work, except this site and the game's code — built with Claude. workin on too many things to learn html/css/js.<br>
+  all my work is inspired by my favorite creations.
+</footer>
+
+<script src="data/galeria.js"></script>
+<script src="data/videos.js"></script>
+<script src="js/wiki-data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
